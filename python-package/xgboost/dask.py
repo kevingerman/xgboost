@@ -139,7 +139,7 @@ def _multi_lock() -> Any:
 def _start_tracker(n_workers: int) -> Dict[str, Any]:
     """Start Rabit tracker """
     env: Dict[str, Union[int, str]] = {'DMLC_NUM_WORKER': n_workers}
-    host = get_host_ip('auto')
+    host = get_host_ip()
     rabit_context = RabitTracker(hostIP=host, n_workers=n_workers, use_logger=False)
     env.update(rabit_context.worker_envs())
 

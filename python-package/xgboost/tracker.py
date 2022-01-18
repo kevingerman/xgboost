@@ -376,11 +376,18 @@ class RabitTracker:
 
 
 def get_host_ip(hostIP: Optional[str] = None) -> str:
-    if hostIP is None or hostIP == 'auto':
+    if hostIP is None:
+        hostIP=config.get_config.get('host_iface', 'auto')
+    if hostIP=='env_var':
+        hostIP=os.getenv('XGBOOST_HOST_IFACE','auto')
+    if hostIP == 'auto':
         hostIP = 'ip'
-
-    if hostIP == 'dns':
+    elif hostIP == 'dns':
         hostIP = socket.getfqdn()
+    elif hostIP == 'local':
+        hostIP='127.0.0.1'
+    elif hostIP == 'all':
+        hostIP == '0.0.0.0'  #but what do the clients use to connect?
     elif hostIP == 'ip':
         from socket import gaierror
         try:

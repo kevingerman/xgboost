@@ -26,8 +26,8 @@ The following parameters can be set in the global scope, using :py:func:`xgboost
 
 * ``verbosity``: Verbosity of printing messages. Valid values of 0 (silent), 1 (warning), 2 (info), and 3 (debug).
 * ``use_rmm``: Whether to use RAPIDS Memory Manager (RMM) to allocate GPU memory. This option is only applicable when XGBoost is built (compiled) with the RMM plugin enabled. Valid values are ``true`` and ``false``.
-
-******************
+* ``host_iface``: . Valid values are ``auto`` (default), ``ip``, ``dns``, ``local``, ``all``, or ``env_var``.  If ``env_var`` then the interface IP will be pulled from an environemnt variable ``XGBOOST_HOST_IFACE``.
+*****************
 General Parameters
 ******************
 * ``booster`` [default= ``gbtree`` ]

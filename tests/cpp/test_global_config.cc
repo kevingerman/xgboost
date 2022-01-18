@@ -29,4 +29,14 @@ TEST(GlobalConfiguration, UseRMM) {
   EXPECT_EQ(get<String>(current_config["use_rmm"]), "1");
 }
 
+TEST(GlobalConfiguration, HostIFace) {
+  Json config{JsonObject()};
+  config["host_iface"] = String("auto");
+  auto& global_config = *GlobalConfigThreadLocalStore::Get();
+  FromJson(config, &global_config);
+  // GetConfig() should return updated use_rmm flag
+  Json current_config { ToJson(*GlobalConfigThreadLocalStore::Get()) };
+  EXPECT_EQ(get<String>(current_config["host_iface"]), "auto");
+}
+
 }  // namespace xgboost
